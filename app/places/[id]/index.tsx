@@ -17,6 +17,7 @@ import {
   TextInput,
 } from "react-native-paper";
 import { useFocusEffect } from "expo-router";
+import { useTranslation } from "react-i18next";
 import * as ImagePicker from "expo-image-picker";
 import {
   addPlaceContact,
@@ -42,6 +43,7 @@ export default function PlaceDetailScreen() {
   const [newContactKind, setNewContactKind] = useState("");
   const [newContactValue, setNewContactValue] = useState("");
   const router = useRouter();
+  const { t } = useTranslation();
 
   const load = useCallback(async () => {
     if (isNaN(placeId)) return;
@@ -71,7 +73,7 @@ export default function PlaceDetailScreen() {
   const handleAddPhoto = async () => {
     const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
     if (status !== "granted") {
-      Alert.alert("Нет доступа к галерее");
+      Alert.alert(t("common.error"), t("places.alerts.noGalleryAccess"));
       return;
     }
     const result = await ImagePicker.launchImageLibraryAsync({
@@ -85,7 +87,7 @@ export default function PlaceDetailScreen() {
       await addPlacePhoto(placeId, path);
       load();
     } catch (e) {
-      Alert.alert("Ошибка", e instanceof Error ? e.message : "Не удалось добавить фото");
+      Alert.alert(t("common.error"), e instanceof Error ? e.message : t("places.alerts.addPhotoError"));
     }
   };
 
@@ -95,7 +97,7 @@ export default function PlaceDetailScreen() {
       await deletePhotoFile(photo.path);
       load();
     } catch (e) {
-      Alert.alert("Ошибка", e instanceof Error ? e.message : "Не удалось удалить");
+      Alert.alert(t("common.error"), e instanceof Error ? e.message : t("places.alerts.deletePhotoError"));
     }
   };
 
@@ -109,7 +111,7 @@ export default function PlaceDetailScreen() {
       setNewContactValue("");
       load();
     } catch (e) {
-      Alert.alert("Ошибка", e instanceof Error ? e.message : "Не удалось добавить контакт");
+      Alert.alert(t("common.error"), e instanceof Error ? e.message : t("places.alerts.addContactError"));
     }
   };
 
@@ -118,25 +120,25 @@ export default function PlaceDetailScreen() {
       await deletePlaceContact(contactId);
       load();
     } catch (e) {
-      Alert.alert("Ошибка", e instanceof Error ? e.message : "Не удалось удалить");
+      Alert.alert(t("common.error"), e instanceof Error ? e.message : t("places.alerts.deleteContactError"));
     }
   };
 
   const handleDeletePlace = () => {
     Alert.alert(
-      "Удалить место?",
-      `«${place?.name}» будет удалено.`,
+      t("places.detail.deleteConfirm"),
+      t("places.detail.deleteConfirmMessage", { name: place?.name }),
       [
-        { text: "Отмена", style: "cancel" },
+        { text: t("common.cancel"), style: "cancel" },
         {
-          text: "Удалить",
+          text: t("common.delete"),
           style: "destructive",
           onPress: async () => {
             try {
               await deletePlace(placeId);
               router.replace("/places");
             } catch (e) {
-              Alert.alert("Ошибка", e instanceof Error ? e.message : "Не удалось удалить");
+              Alert.alert(t("common.error"), e instanceof Error ? e.message : t("places.alerts.deletePlaceError"));
             }
           },
         },
@@ -148,7 +150,7 @@ export default function PlaceDetailScreen() {
   if (!place) {
     return (
       <View style={styles.centered}>
-        <Text>Место не найдено</Text>
+        <Text>{t("places.detail.notFound")}</Text>
       </View>
     );
   }
@@ -161,25 +163,25 @@ export default function PlaceDetailScreen() {
         <Card.Title title={place.name} subtitle={place.description || undefined} />
         <Card.Content>
           <Text variant="bodyMedium">
-            Хочу посетить позже: {place.visitlater ? "да" : "нет"}
+            {t("places.detail.visitLater")}: {place.visitlater ? t("common.yes") : t("common.no")}
           </Text>
-          <Text variant="bodyMedium">Понравилось: {place.liked ? "да" : "нет"}</Text>
+          <Text variant="bodyMedium">{t("places.detail.liked")}: {place.liked ? t("common.yes") : t("common.no")}</Text>
           {hasCoords && (
             <Text variant="bodySmall">
-              Координаты: {place.latitude!.toFixed(5)}, {place.longitude!.toFixed(5)}
+              {t("places.detail.coords")}: {place.latitude!.toFixed(5)}, {place.longitude!.toFixed(5)}
             </Text>
           )}
         </Card.Content>
         <Card.Actions>
-          <Button onPress={() => router.push(`/places/${placeId}/edit`)}>Редактировать</Button>
+          <Button onPress={() => router.push(`/places/${placeId}/edit`)}>{t("places.detail.edit")}</Button>
           {hasCoords && (
-            <Button onPress={handleOpenMap}>Открыть на карте</Button>
+            <Button onPress={handleOpenMap}>{t("places.detail.openOnMap")}</Button>
           )}
-          <Button textColor="#b00020" onPress={handleDeletePlace}>Удалить</Button>
+          <Button textColor="#b00020" onPress={handleDeletePlace}>{t("places.detail.delete")}</Button>
         </Card.Actions>
       </Card>
 
-      <Text variant="titleMedium" style={styles.sectionTitle}>Фотографии</Text>
+      <Text variant="titleMedium" style={styles.sectionTitle}>{t("places.detail.photos")}</Text>
       <View style={styles.photoRow}>
         {photos.map((photo) => (
           <View key={photo.id} style={styles.photoWrap}>
@@ -193,11 +195,11 @@ export default function PlaceDetailScreen() {
           </View>
         ))}
         <TouchableOpacity style={styles.addPhoto} onPress={handleAddPhoto}>
-          <Text>+ Фото</Text>
+          <Text>{t("places.detail.addPhoto")}</Text>
         </TouchableOpacity>
       </View>
 
-      <Text variant="titleMedium" style={styles.sectionTitle}>Контакты</Text>
+      <Text variant="titleMedium" style={styles.sectionTitle}>{t("places.detail.contacts")}</Text>
       {contacts.map((c) => (
         <List.Item
           key={c.id}
@@ -214,7 +216,7 @@ export default function PlaceDetailScreen() {
       ))}
       <View style={styles.newContact}>
         <TextInput
-          label="Тип (телефон, email…)"
+          label={t("places.detail.contactKind")}
           value={newContactKind}
           onChangeText={setNewContactKind}
           mode="outlined"
@@ -222,7 +224,7 @@ export default function PlaceDetailScreen() {
           style={styles.contactInput}
         />
         <TextInput
-          label="Значение"
+          label={t("places.detail.contactValue")}
           value={newContactValue}
           onChangeText={setNewContactValue}
           mode="outlined"
@@ -230,7 +232,7 @@ export default function PlaceDetailScreen() {
           style={styles.contactInput}
         />
         <Button mode="outlined" onPress={handleAddContact} compact>
-          Добавить
+          {t("places.detail.add")}
         </Button>
       </View>
     </ScrollView>

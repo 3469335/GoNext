@@ -1,0 +1,101 @@
+{
+  "common": {
+    "appName": "GoNext",
+    "save": "Сохранить",
+    "cancel": "Отмена",
+    "delete": "Удалить",
+    "edit": "Редактировать",
+    "add": "Добавить",
+    "loading": "Загрузка...",
+    "error": "Ошибка",
+    "yes": "да",
+    "no": "нет"
+  },
+  "home": {
+    "places": "Места",
+    "trips": "Поездки",
+    "nextPlace": "Следующее место",
+    "settings": "Настройки"
+  },
+  "nav": {
+    "places": "Места",
+    "trips": "Поездки",
+    "nextPlace": "Следующее место",
+    "settings": "Настройки",
+    "newPlace": "Новое место",
+    "place": "Место",
+    "edit": "Редактировать"
+  },
+  "settings": {
+    "title": "Настройки",
+    "appearance": "Внешний вид",
+    "theme": "Тема",
+    "themeDescription": "Светлая или тёмная. В тёмной теме фоновое изображение на главном экране отключено.",
+    "light": "Светлая",
+    "dark": "Тёмная",
+    "primaryColor": "Основной цвет",
+    "primaryColorDescription": "Выберите цвет акцентов приложения",
+    "resetColor": "Сбросить цвет",
+    "resetColorDescription": "Вернуть цвет по умолчанию",
+    "orientation": "Ориентация экрана",
+    "orientationDescription": "Портрет или альбом. В альбомном режиме размер шрифта увеличен.",
+    "portrait": "Портрет",
+    "landscape": "Альбом",
+    "language": "Язык",
+    "languageDescription": "Язык интерфейса приложения",
+    "russian": "Русский",
+    "english": "English"
+  },
+  "places": {
+    "title": "Места",
+    "empty": "Нет мест. Добавьте первое.",
+    "addPlace": "Добавить место",
+    "form": {
+      "name": "Название *",
+      "description": "Описание",
+      "visitLater": "Хочу посетить позже",
+      "liked": "Понравилось",
+      "coords": "Координаты (широта, долгота)",
+      "coordsPlaceholder": "55.7558, 37.6173",
+      "save": "Сохранить",
+      "errorName": "Введите название",
+      "errorCoords": "Введите широту и долготу через запятую",
+      "errorLat": "Широта: число от -90 до 90",
+      "errorLon": "Долгота: число от -180 до 180",
+      "errorSave": "Ошибка сохранения"
+    },
+    "detail": {
+      "edit": "Редактировать",
+      "openOnMap": "Открыть на карте",
+      "delete": "Удалить",
+      "photos": "Фотографии",
+      "addPhoto": "+ Фото",
+      "contacts": "Контакты",
+      "contactKind": "Тип (телефон, email…)",
+      "contactValue": "Значение",
+      "add": "Добавить",
+      "deleteConfirm": "Удалить место?",
+      "deleteConfirmMessage": "«{{name}}» будет удалено.",
+      "notFound": "Место не найдено",
+      "visitLater": "Хочу посетить позже",
+      "liked": "Понравилось",
+      "coords": "Координаты"
+    },
+    "alerts": {
+      "noGalleryAccess": "Нет доступа к галерее",
+      "addPhotoError": "Не удалось добавить фото",
+      "deletePhotoError": "Не удалось удалить",
+      "addContactError": "Не удалось добавить контакт",
+      "deleteContactError": "Не удалось удалить",
+      "deletePlaceError": "Не удалось удалить"
+    }
+  },
+  "trips": {
+    "title": "Список поездок",
+    "stub": "Здесь будет список поездок (этап 4)."
+  },
+  "next": {
+    "title": "Следующее место",
+    "stub": "Здесь будет следующее место по маршруту (этап 5)."
+  }
+}

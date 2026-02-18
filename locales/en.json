@@ -1,0 +1,101 @@
+{
+  "common": {
+    "appName": "GoNext",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "add": "Add",
+    "loading": "Loading...",
+    "error": "Error",
+    "yes": "yes",
+    "no": "no"
+  },
+  "home": {
+    "places": "Places",
+    "trips": "Trips",
+    "nextPlace": "Next place",
+    "settings": "Settings"
+  },
+  "nav": {
+    "places": "Places",
+    "trips": "Trips",
+    "nextPlace": "Next place",
+    "settings": "Settings",
+    "newPlace": "New place",
+    "place": "Place",
+    "edit": "Edit"
+  },
+  "settings": {
+    "title": "Settings",
+    "appearance": "Appearance",
+    "theme": "Theme",
+    "themeDescription": "Light or dark. In dark theme the home screen background image is disabled.",
+    "light": "Light",
+    "dark": "Dark",
+    "primaryColor": "Primary color",
+    "primaryColorDescription": "Choose the accent color for the app",
+    "resetColor": "Reset color",
+    "resetColorDescription": "Restore default color",
+    "orientation": "Screen orientation",
+    "orientationDescription": "Portrait or landscape. In landscape mode font size is increased.",
+    "portrait": "Portrait",
+    "landscape": "Landscape",
+    "language": "Language",
+    "languageDescription": "App interface language",
+    "russian": "Русский",
+    "english": "English"
+  },
+  "places": {
+    "title": "Places",
+    "empty": "No places. Add the first one.",
+    "addPlace": "Add place",
+    "form": {
+      "name": "Name *",
+      "description": "Description",
+      "visitLater": "Want to visit later",
+      "liked": "Liked",
+      "coords": "Coordinates (latitude, longitude)",
+      "coordsPlaceholder": "55.7558, 37.6173",
+      "save": "Save",
+      "errorName": "Enter name",
+      "errorCoords": "Enter latitude and longitude separated by comma",
+      "errorLat": "Latitude: number from -90 to 90",
+      "errorLon": "Longitude: number from -180 to 180",
+      "errorSave": "Save error"
+    },
+    "detail": {
+      "edit": "Edit",
+      "openOnMap": "Open on map",
+      "delete": "Delete",
+      "photos": "Photos",
+      "addPhoto": "+ Photo",
+      "contacts": "Contacts",
+      "contactKind": "Type (phone, email…)",
+      "contactValue": "Value",
+      "add": "Add",
+      "deleteConfirm": "Delete place?",
+      "deleteConfirmMessage": "«{{name}}» will be deleted.",
+      "notFound": "Place not found",
+      "visitLater": "Want to visit later",
+      "liked": "Liked",
+      "coords": "Coordinates"
+    },
+    "alerts": {
+      "noGalleryAccess": "No access to gallery",
+      "addPhotoError": "Could not add photo",
+      "deletePhotoError": "Could not delete",
+      "addContactError": "Could not add contact",
+      "deleteContactError": "Could not delete",
+      "deletePlaceError": "Could not delete"
+    }
+  },
+  "trips": {
+    "title": "Trips list",
+    "stub": "Trips list will be here (stage 4)."
+  },
+  "next": {
+    "title": "Next place",
+    "stub": "Next place on the route will be here (stage 5)."
+  }
+}

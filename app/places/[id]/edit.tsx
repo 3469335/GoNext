@@ -2,6 +2,7 @@ import { useLocalSearchParams, useRouter } from "expo-router";
 import { useEffect, useState } from "react";
 import { ScrollView, StyleSheet } from "react-native";
 import { Button, Checkbox, Text, TextInput } from "react-native-paper";
+import { useTranslation } from "react-i18next";
 import { getPlaceById, updatePlace } from "@/lib/places";
 
 export default function EditPlaceScreen() {
@@ -16,6 +17,7 @@ export default function EditPlaceScreen() {
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState("");
   const router = useRouter();
+  const { t } = useTranslation();
 
   useEffect(() => {
     if (isNaN(placeId)) return;
@@ -38,7 +40,7 @@ export default function EditPlaceScreen() {
   const handleSave = async () => {
     const trimmedName = name.trim();
     if (!trimmedName) {
-      setError("Введите название");
+      setError(t("places.form.errorName"));
       return;
     }
     const parts = coordsStr.trim().split(/[\s,;]+/).filter(Boolean);
@@ -48,15 +50,15 @@ export default function EditPlaceScreen() {
       lat = parseFloat(parts[0]);
       lon = parseFloat(parts[1]);
     } else if (parts.length === 1) {
-      setError("Введите широту и долготу через запятую");
+      setError(t("places.form.errorCoords"));
       return;
     }
     if (lat != null && (isNaN(lat) || lat < -90 || lat > 90)) {
-      setError("Широта: число от -90 до 90");
+      setError(t("places.form.errorLat"));
       return;
     }
     if (lon != null && (isNaN(lon) || lon < -180 || lon > 180)) {
-      setError("Долгота: число от -180 до 180");
+      setError(t("places.form.errorLon"));
       return;
     }
     setError("");
@@ -72,7 +74,7 @@ export default function EditPlaceScreen() {
       });
       router.replace(`/places/${placeId}`);
     } catch (e) {
-      setError(e instanceof Error ? e.message : "Ошибка сохранения");
+      setError(e instanceof Error ? e.message : t("places.form.errorSave"));
     } finally {
       setSaving(false);
     }
@@ -83,14 +85,14 @@ export default function EditPlaceScreen() {
   return (
     <ScrollView style={styles.scroll} contentContainerStyle={styles.content}>
       <TextInput
-        label="Название *"
+        label={t("places.form.name")}
         value={name}
         onChangeText={setName}
         mode="outlined"
         style={styles.input}
       />
       <TextInput
-        label="Описание"
+        label={t("places.form.description")}
         value={description}
         onChangeText={setDescription}
         mode="outlined"
@@ -99,22 +101,22 @@ export default function EditPlaceScreen() {
         style={styles.input}
       />
       <Checkbox.Item
-        label="Хочу посетить позже"
+        label={t("places.form.visitLater")}
         status={visitlater ? "checked" : "unchecked"}
         onPress={() => setVisitlater((v) => !v)}
       />
       <Checkbox.Item
-        label="Понравилось"
+        label={t("places.form.liked")}
         status={liked ? "checked" : "unchecked"}
         onPress={() => setLiked((v) => !v)}
       />
       <TextInput
-        label="Координаты (широта, долгота)"
+        label={t("places.form.coords")}
         value={coordsStr}
         onChangeText={setCoordsStr}
         mode="outlined"
         keyboardType="numbers-and-punctuation"
-        placeholder="55.7558, 37.6173"
+        placeholder={t("places.form.coordsPlaceholder")}
         style={styles.input}
       />
       {error ? <Text style={styles.error}>{error}</Text> : null}
@@ -125,7 +127,7 @@ export default function EditPlaceScreen() {
         disabled={saving}
         style={styles.button}
       >
-        Сохранить
+        {t("places.form.save")}
       </Button>
     </ScrollView>
   );

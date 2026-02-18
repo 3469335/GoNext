@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from "react";
 import { StyleSheet, View } from "react-native";
 import { FAB, List, Text, useTheme } from "react-native-paper";
 import { useFocusEffect, useRouter } from "expo-router";
+import { useTranslation } from "react-i18next";
 import { getAllPlaces } from "@/lib/places";
 import type { Place } from "@/lib/types";
 
@@ -10,6 +11,7 @@ export default function PlacesListScreen() {
   const [loading, setLoading] = useState(true);
   const router = useRouter();
   const theme = useTheme();
+  const { t } = useTranslation();
 
   const load = useCallback(async () => {
     setLoading(true);
@@ -31,11 +33,11 @@ export default function PlacesListScreen() {
     <View style={styles.container}>
       {loading ? (
         <View style={styles.centered}>
-          <Text>Загрузка...</Text>
+          <Text>{t("common.loading")}</Text>
         </View>
       ) : places.length === 0 ? (
         <View style={styles.centered}>
-          <Text variant="bodyLarge">Нет мест. Добавьте первое.</Text>
+          <Text variant="bodyLarge">{t("places.empty")}</Text>
         </View>
       ) : (
         <List.Section>
@@ -60,7 +62,7 @@ export default function PlacesListScreen() {
         icon="plus"
         style={[styles.fab, { backgroundColor: theme.colors.primaryContainer }]}
         onPress={() => router.push("/places/new")}
-        label="Добавить место"
+        label={t("places.addPlace")}
       />
     </View>
   );
