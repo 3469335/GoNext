@@ -1,17 +1,9 @@
-import { useState } from "react";
 import { StyleSheet, View } from "react-native";
-import {
-  Appbar,
-  Button,
-  Snackbar,
-  Text,
-} from "react-native-paper";
+import { Appbar, Button } from "react-native-paper";
+import { useRouter } from "expo-router";
 
 export default function HomeScreen() {
-  const [snackbarVisible, setSnackbarVisible] = useState(false);
-
-  const showSnackbar = () => setSnackbarVisible(true);
-  const hideSnackbar = () => setSnackbarVisible(false);
+  const router = useRouter();
 
   return (
     <View style={styles.container}>
@@ -20,25 +12,35 @@ export default function HomeScreen() {
       </Appbar.Header>
 
       <View style={styles.content}>
-        <Text variant="titleLarge" style={styles.text}>
-          Привет, Эдуард!
-        </Text>
-        <Button mode="contained" onPress={showSnackbar}>
-          Нажми меня
+        <Button
+          mode="contained"
+          onPress={() => router.push("/places")}
+          style={styles.button}
+        >
+          Места
+        </Button>
+        <Button
+          mode="contained"
+          onPress={() => router.push("/trips")}
+          style={styles.button}
+        >
+          Поездки
+        </Button>
+        <Button
+          mode="contained"
+          onPress={() => router.push("/next")}
+          style={styles.button}
+        >
+          Следующее место
+        </Button>
+        <Button
+          mode="contained"
+          onPress={() => router.push("/settings")}
+          style={styles.button}
+        >
+          Настройки
         </Button>
       </View>
-
-      <Snackbar
-        visible={snackbarVisible}
-        onDismiss={hideSnackbar}
-        duration={3000}
-        action={{
-          label: "OK",
-          onPress: hideSnackbar,
-        }}
-      >
-        Кнопка нажата
-      </Snackbar>
     </View>
   );
 }
@@ -53,8 +55,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
     padding: 24,
   },
-  text: {
-    textAlign: "center",
-    marginBottom: 24,
+  button: {
+    minWidth: 200,
+    marginBottom: 16,
   },
 });
