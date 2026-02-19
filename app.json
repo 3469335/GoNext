@@ -21,7 +21,11 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.gonext.app"
+      "package": "com.gonext.app",
+      "permissions": [
+        "android.permission.RECORD_AUDIO",
+        "android.permission.RECORD_AUDIO"
+      ]
     },
     "plugins": [
       "expo-router",
@@ -30,8 +34,24 @@
       "expo-sqlite",
       [
         "expo-image-picker",
-        { "photosPermission": "Приложению нужен доступ к фото для прикрепления к местам." }
+        {
+          "photosPermission": "Приложению нужен доступ к фото для прикрепления к местам."
+        }
       ]
-    ]
+    ],
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "f666b0b5-3a8d-4269-953f-7260055f5867"
+      }
+    },
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/f666b0b5-3a8d-4269-953f-7260055f5867"
+    }
   }
 }
